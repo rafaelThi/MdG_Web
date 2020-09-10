@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mercadão do jogo</title>
+    <link rel="stylesheet" href="/styles/style-sell.css">
+</head>
+
+<body class="page">
+<div>
+    <div class="top">
+        <div class="button">
+            <a class="text_button" href="/">
+            VOLTAR
+            </a>
+        </div>
+        
+        <p class="title_page">Mercadão do Game</p>
+    
+    </div>
+
+
+    <div class="top-container">
+      
+        <div class="text-top">
+            <strong>
+                O primeiro passo para sua venda é preencher os dados do Game:
+            </strong>
+        </div>
+      </div>
+
+
+      
+      <main>
+        <form action="/save" id="create-sell" method="POST">
+
+            <fieldset>
+              <legend>Seus dados</legend>
+    
+              <div class="input-block">
+                <label for="name_complet">Nome completo</label>
+                <input name="name_complet" id="name_complet" required>
+              </div>
+                    
+              <div class="input-block">
+                <label for="whatsapp">WhatsApp <small>(somente números)</small></label>
+                <input name="whatsapp" id="whatsapp" type="number" required>
+              </div>
+    
+              <div class="city">
+                <label for="city">Cidade<br></label>
+                <input name="city" id="city" required></input>
+              </div>    
+            
+    
+            </fieldset>
+    
+    
+            <fieldset>
+              <legend class="sec">Sobre o Game</legend>
+
+              <div class="input-block">
+                <label for="name_game">Nome do Game <small></small></label>
+                <input name="name_game" id="name_game" type="text" required>
+              </div>
+    
+              <div class="select-block">
+
+                <label for="state">Estado<br></label>
+
+                <select name="state" id="state" required>
+
+                  <option value="">Selecione uma opção</option>
+                  {%for state in states %}
+                  <option value="{{loop.index}}" {{ "selected" if filters.state == loop.index }}>{{state}}</option>
+                                                         {%endfor%}
+                  
+                </select>
+              </div>
+              <div class="select-block">
+
+                <label for="platform">Plataforma<br></label>
+
+                <select name="platform" id="platform" required>
+
+                  {%for platform in platforms %}
+<option value="{{loop.index}}" {{ "selected" if filters.platform == loop.index }}>{{platform}}</option>
+                    {%endfor%}
+                                    
+                  
+                </select>
+              </div>
+    
+              <div class="input-block">
+                <label for="generous"> Gênero
+                <br></label>
+                <select name="generous" id="generous" required>
+
+                <option value="">Escolha um</option>
+                {%for generous in generouss %}
+                <option value="{{loop.index}}" {{ "selected" if filters.generous == loop.index }}>{{generous}}</option>
+                                                       {%endfor%}
+                </select>
+
+                <div class="input-block">
+                  <label for="photo">Link da foto <small>(comece com https://)</small></label>
+                  <input name="photo" id="photo" type="url" required>
+                </div>
+                <div class="input-block">
+                  <label for="cost">Preço <small>(R$)</small></label>
+                  <input name="cost" id="cost" type="number" required>
+                </div>
+                
+              </div>
+            </fieldset>
+
+          </form>
+
+
+          
+          <button type= "submit" form="create-sell">Salvar cadastro</button>
+        
+      </main>
+      </div>
+  </body>
+</html>

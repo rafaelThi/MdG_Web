@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="pt_br">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Mercadão do Game </title>
+
+    <link rel="stylesheet" href="/styles/style-buy.css">
+</head>
+
+
+<body class="fundo" >
+    <header class="topo">
+        <div class="top">
+            <div class="button">
+                <a class="text_button" href="/">
+                VOLTAR
+                </a>
+            </div>
+            
+            <p class="title_page">Mercadão do Game</p>
+        
+        </div>
+    
+    <div id="filter">
+
+        <strong>
+            Esses são os jogos disponíveis!
+        </strong>
+
+        <form id="search-game">
+            <div class="select-block">
+                <label for="platform">Plataforma: </label>
+                <select name="platform" id="platform">
+                    <option value="" disabled="" hidden="">Selecione uma opção</option>
+
+                    {%for platform in platforms %}
+<option value="{{loop.index}}" {{ "selected" if filters.platform == loop.index }}>{{platform}}</option>
+                    {%endfor%}
+                </select>
+            </div>
+            <div class="select-block">
+                <label for="state">Estado: </label>
+                <select name="state" id="state">
+                    <option value="" disabled="" hidden="">Selecione uma opção</option>
+ {%for state in states %}
+ <option value="{{loop.index}}" {{ "selected" if filters.state == loop.index }}>{{state}}</option>
+                                        {%endfor%}
+
+                </select>
+            </div>
+            <div class="select-block">
+                <label for="generous">Gênero<br>
+                </label>
+                <select name="generous" id="generous">
+                <option value="">Escolha um</option>
+
+                {%for generous in generouss %}
+                <option value="{{loop.index}}" {{ "selected" if filters.generous == loop.index }}>{{generous}}</option>
+                                                       {%endfor%}
+                  
+                </select>
+            </div>
+            <button type="submit">Filtrar</button>
+        </form>
+    </header>
+        <main>
+            {% if games == "" %}
+            <p class="not-foud">Desculpe... Mas nenhum Game foi encontrado :(</p>
+
+            {% else %}
+            {%for game in games %}
+            <article class="game-item">
+          
+                <header>
+                  <img src="{{ game.photo }}" alt="{{ game.name_game }}">
+                  <div>
+                    <strong>{{ game.name_game }}</strong>
+
+                    <p class="data_sell">Vendedor: {{game.name_complet}}
+                        <br>
+                    Estado: {{game.state}}
+                        <br>
+                    Plataforma: {{game.platform}}
+                        <br>
+                    Cidade: {{game.city}}    <br>
+                    Gênero: {{game.generous}}
+                    </p>
+                  </div>
+                </header>
+      
+                <footer>
+                  <p>Preço: R$<strong>{{ game.cost }},00</strong></p>
+                  
+                  <a href="https://api.whatsapp.com/send?l=pt_BR&phone=55{{ game.whatsapp }} &text= Olá!! Tenho interesse no game {{game.name_game}}" class="button" target="_blank">
+                    WhatsApp
+                  </a>
+                </footer>
+              </article>
+            {%endfor%}
+        
+            {% endif %}
+        </main>
+    </div>
+
+</body>
+</html>
